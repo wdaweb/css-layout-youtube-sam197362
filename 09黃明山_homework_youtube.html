@@ -207,7 +207,8 @@
       width: 116px;
     }
 
-    #left a {
+    #left a,
+    label {
       width: calc(240px - 24px);
       height: 40px;
       display: flex;
@@ -219,7 +220,8 @@
       padding: 0 12px;
     }
 
-    #left a:hover {
+    #left a:hover,
+    label:hover {
       background: #e8e8e8;
       border-radius: 10px;
     }
@@ -243,6 +245,28 @@
       width: 24px;
       height: 24px;
       border-radius: 50%;
+    }
+
+    #left .expanded,
+    .endpoint-less {
+      display: none;
+    }
+
+    /* 當 radio checked 時，觸發下面的 div 顯示 */
+    #more01:checked~.expanded {
+      display: block;
+    }
+
+    #more01:checked~.endpoint-less {
+      display: flex;
+    }
+
+    #more01:checked~.endpoint-more {
+      display: none;
+    }
+
+    #more01 {
+      display: none;
     }
 
 
@@ -394,7 +418,7 @@
   <div id="left">
     <div class="items">
       <a href="#">
-        <i class="fa-regular fa-house"></i>
+        <i class="fa-solid fa-house"></i>
         <span>首頁</span>
       </a>
 
@@ -444,10 +468,38 @@
         <span>台灣達人秀</span>
         <div class="dot"></div>
       </a>
-      <a href="#">
+      <input id="more01" type="checkbox" name="more01">
+      <div class="expanded">
+        <a href="#">
+          <img src="https://picsum.photos/32/32/?random=50">
+          <span>老王愛說笑</span>
+          <div class="dot"></div>
+        </a>
+        <a href="#">
+          <img src="https://picsum.photos/32/32/?random=50">
+          <span>老王愛說笑</span>
+          <div class="dot"></div>
+        </a>
+        <a href="#">
+          <img src="https://picsum.photos/32/32/?random=50">
+          <span>老王愛說笑</span>
+          <div class="dot"></div>
+        </a>
+        <a href="#">
+          <img src="https://picsum.photos/32/32/?random=50">
+          <span>老王愛說笑</span>
+          <div class="dot"></div>
+        </a>
+      </div>
+      <label for="more01" class="endpoint-more">
         <i class="fa-solid fa-angle-down" style="font-size: 16px;width: 16px;height: 16px;"></i>
-        <span>顯示更多</span>
-      </a>
+        <span class="more01-text">顯示更多</span>
+      </label>
+      <label for="more01" class="endpoint-less">
+        <i class="fa-solid fa-angle-up" style="font-size: 16px;width: 16px;height: 16px;"></i>
+        <span class="more01-text">顯示更少</span>
+      </label>
+
     </div>
     <div class="items">
       <a href="#">
@@ -459,30 +511,53 @@
         <span>您的頻道</span>
       </a>
       <a href="#">
-        <i class="fa-regular fa-address-book"></i>
-        <span>您的頻道</span>
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <span>觀看紀錄</span>
       </a>
       <a href="#">
-        <i class="fa-regular fa-address-book"></i>
-        <span>您的頻道</span>
+        <i class="fa-solid fa-computer"></i>
+        <span>播放清單</span>
       </a>
       <a href="#">
-        <i class="fa-regular fa-address-book"></i>
-        <span>您的頻道</span>
+        <i class="fa-regular fa-clock"></i>
+        <span>稍後觀看</span>
       </a>
       <a href="#">
-        <i class="fa-regular fa-address-book"></i>
-        <span>您的頻道</span>
+        <i class="fa-regular fa-thumbs-up"></i>
+        <span>喜歡的影片</span>
       </a>
       <a href="#">
-        <i class="fa-regular fa-address-book"></i>
-        <span>您的頻道</span>
+        <i class="fa-brands fa-google-play"></i>
+        <span>您的影片</span>
       </a>
       <a href="#">
-        <i class="fa-regular fa-address-book"></i>
-        <span>您的頻道</span>
+        <i class="fa-solid fa-arrows-down-to-line"></i>
+        <span>已下載的內容</span>
       </a>
     </div>
+
+    <div class="items">
+      <a href="#">
+        探索
+      </a>
+      <a href="#">
+        <i class="fa-solid fa-music"></i>
+        <span>音樂</span>
+      </a>
+      <a href="#">
+        <i class="fa-solid fa-clapperboard"></i>
+        <span>電影</span>
+      </a>
+      <a href="#">
+        <i class="fa-solid fa-rss"></i>
+        <span>直播</span>
+      </a>
+      <a href="#">
+        <i class="fa-solid fa-angle-down" style="font-size: 16px;width: 16px;height: 16px;"></i>
+        <span>顯示更多</span>
+      </a>
+    </div>
+
   </div>
 
   <div id="right">
