@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- fontawesome 的 css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      box-sizing: border-box;
+      /* color: #0f0f0f; */
+    }
+
+    a:visited {
+      color: #0f0f0f;
+    }
+
+    #top {
+      display: flex;
+      align-items: center;
+      height: 56px;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      padding: 0 16px;
+      z-index: 999;
+      background: white;
+    }
+
+    /* MENU按鈕 */
+    #top .menu-btn {
+      width: 40px;
+      height: 40px;
+      background: white;
+      border: 0;
+      font-size: 18px;
+      cursor: pointer;
+      margin-right: 10px;
+      /* 
+      border: 1px solid #ccc;
+      border-radius: 40px;
+      background: #f8f8f8;
+       */
+    }
+
+    #top .menu-btn:hover {
+      /* border: 1px solid #ccc; */
+      border-radius: 50%;
+      background: #e8e8e8;
+    }
+
+    #top .yt-icon {
+      display: flex;
+      align-items: center;
+      /* width: 169px; */
+      height: 56px;
+      cursor: pointer;
+    }
+
+    #top .search-box-container {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      flex: 0 1 700px;
+      display: flex;
+      align-items: center;
+    }
+
+    #top .search-box-container .search-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      width: 515px;
+      height: 40px;
+
+      border: 1px solid #ccc;
+      border-radius: 40px 0 0 40px;
+      overflow: hidden;
+
+      background: #f5f5f5;
+    }
+
+    /* 輸入框 */
+    #top .search-box-container .search-box input {
+      flex: 1;
+      height: 100%;
+
+      border: none;
+      outline: none;
+      padding: 0 15px;
+
+      background: transparent;
+      font-size: 16px;
+    }
+
+    /* 搜尋按鈕 */
+    #top .search-box-container .search-btn {
+      width: 60px;
+      height: 40px;
+      border: 1px solid #ccc;
+      border-radius: 0 40px 40px 0;
+      background: #f8f8f8;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    /* 麥克風按鈕 */
+    #top .search-box-container .mic-btn {
+      width: 40px;
+      height: 40px;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      background: #f8f8f8;
+      font-size: 18px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    #top .search-box-container button:hover {
+      background: #e8e8e8;
+    }
+
+    #top .top-end {
+      position: absolute;
+      right: 0;
+      width: 200px;
+      /* flex: 0 1 225px; */
+      display: flex;
+      align-items: center;
+
+    }
+
+    #top .top-end .create-btn {
+      width: 84px;
+      height: 36px;
+      border: 1px solid #ccc;
+      border-radius: 36px;
+      background: #f8f8f8;
+      font-size: 16px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    #top .top-end .bell-btn {
+      width: 36px;
+      height: 36px;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      background: #f8f8f8;
+      font-size: 16px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+
+    /* #top .top-end button:hover {
+      background: #e8e8e8;
+    } */
+
+    #top .top-end .create-btn:hover,
+    #top .top-end .bell-btn:hover {
+      background: #e8e8e8;
+    }
+
+    #top .top-end .user-btn {
+      align-items: center;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      display: flex;
+      outline: none;
+
+    }
+
+    #top .top-end .user-btn img {
+      border-radius: 50%;
+    }
+
+    #left {
+      width: 260px;
+      height: calc(100vh - 56px);
+      position: fixed;
+      overflow: auto;
+      top: 56px;
+      left: 0;
+      color: #0f0f0f;
+
+      /* background: blue; */
+    }
+
+    #left .items {
+      width: 240px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      margin: 0 12px;
+      padding: 12px 0;
+    }
+
+    #left .items span {
+      width: 116px;
+    }
+
+    #left a {
+      width: calc(240px - 24px);
+      height: 40px;
+      display: flex;
+      cursor: pointer;
+      text-decoration: none;
+      align-items: center;
+      gap: 24px;
+      font-size: 15px;
+      padding: 0 12px;
+    }
+
+    #left a:hover {
+      background: #e8e8e8;
+      border-radius: 10px;
+    }
+
+    #left i {
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+      text-align: center;
+    }
+
+    #left .items .dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: #065fd4;
+      margin: 0 6px;
+    }
+
+    #left .items img {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+    }
+
+
+    #right {
+      width: calc(100vw - 300px);
+      position: relative;
+      top: 56px;
+      margin-left: 270px;
+      /* background: green; */
+    }
+
+    #category {
+      width: calc(100vw - 300px);
+      height: 56px;
+      position: fixed;
+      background: white;
+      z-index: 999;
+    }
+
+    #category button {
+      height: 32px;
+      margin: 12px 12px 12px 0;
+      padding: 0 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 0;
+    }
+
+    #category button.selected {
+      background: #000;
+      color: #fff;
+    }
+
+    #main {
+      display: flex;
+      flex-wrap: wrap;
+      width: calc(100vw - 300px);
+      position: relative;
+      top: 56px;
+
+      /* background: lightcoral; */
+    }
+
+    #main .content {
+      width: 400px;
+      height: 300px;
+      margin-bottom: 32px;
+      padding: 6px;
+      cursor: pointer;
+      box-sizing: unset;
+
+      img {
+        border-radius: 10px;
+        width: 400px;
+      }
+    }
+
+    #main .content:nth-child(odd):hover {
+      background: lightblue;
+      border-radius: 10px;
+    }
+
+    #main .content:nth-child(even):hover {
+      background: lightpink;
+      border-radius: 10px;
+    }
+
+    #main .content .data {
+      display: flex;
+      width: 400px;
+      height: 66px;
+      margin: 0 auto;
+
+    }
+
+    #main .content .data-left {
+      width: 36px;
+      margin: 0 12px 0 0;
+
+      img {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+      }
+    }
+
+    #main .content .data-right {
+      width: 36px;
+
+      button {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 0;
+        background: rgba(255, 255, 255, 0.1);
+        font-size: 18px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #e8e8e8;
+      }
+
+    }
+
+    #main .content .data-center {
+      /* width: calc(400px - 36px -36px); */
+      margin: 0 12px 0 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="top">
+    <button class="menu-btn">
+      <i class="fa-solid fa-align-justify"></i>
+    </button>
+    <div class="yt-icon">
+      <i class="fa-brands fa-youtube fa-2xl" style="color: red;"></i>
+      <span style="font-weight: bold; font-size: 1.5rem;">YouTube</span>
+      <span style="vertical-align:super; font-size: 0.5rem; height: 30px;">TW</span>
+    </div>
+    <div class="search-box-container">
+      <div class="search-box">
+        <input type="text" placeholder="搜尋">
+      </div>
+      <button class="search-btn">
+        <i class="fa fa-search"></i>
+      </button>
+      <button class="mic-btn">
+        <i class="fa-solid fa-microphone"></i>
+      </button>
+    </div>
+    <div class="top-end">
+      <button class="create-btn">
+        <i class="fa-solid fa-plus"></i>
+        <span>建立</span>
+      </button>
+      <button class="bell-btn">
+        <i class="fa-regular fa-bell"></i>
+      </button>
+      <button class="user-btn">
+        <img src="https://picsum.photos/32/32/?random=10">
+      </button>
+    </div>
+
+  </div>
+
+  <div id="left">
+    <div class="items">
+      <a href="#">
+        <i class="fa-regular fa-house"></i>
+        <span>首頁</span>
+      </a>
+
+      <a href="#">
+        <i class="fa-solid fa-bolt"></i>
+        <span>Shorts</span>
+      </a>
+    </div>
+    <div class="items">
+      <a href="#">
+        訂閱內容
+        <i class="fa-solid fa-angle-right" style="font-size: 16px;width: 16px;height: 16px;"></i>
+      </a>
+      <a href="#">
+        <img src="https://picsum.photos/32/32/?random=20">
+        <span>夜市談財經</span>
+        <div class="dot"></div>
+      </a>
+
+      <a href="#">
+        <img src="https://picsum.photos/32/32/?random=30">
+        <span>KT Story</span>
+        <div class="dot"></div>
+      </a>
+      <a href="#">
+        <img src="https://picsum.photos/32/32/?random=40">
+        <span>台灣達人秀</span>
+        <div class="dot"></div>
+      </a>
+      <a href="#">
+        <img src="https://picsum.photos/32/32/?random=40">
+        <span>台灣達人秀</span>
+        <div class="dot"></div>
+      </a>
+      <a href="#">
+        <img src="https://picsum.photos/32/32/?random=40">
+        <span>台灣達人秀</span>
+        <div class="dot"></div>
+      </a>
+      <a href="#">
+        <img src="https://picsum.photos/32/32/?random=40">
+        <span>台灣達人秀</span>
+        <div class="dot"></div>
+      </a>
+      <a href="#">
+        <img src="https://picsum.photos/32/32/?random=40">
+        <span>台灣達人秀</span>
+        <div class="dot"></div>
+      </a>
+      <a href="#">
+        <i class="fa-solid fa-angle-down" style="font-size: 16px;width: 16px;height: 16px;"></i>
+        <span>顯示更多</span>
+      </a>
+    </div>
+    <div class="items">
+      <a href="#">
+        個人中心
+        <i class="fa-solid fa-angle-right" style="font-size: 16px;width: 16px;height: 16px;"></i>
+      </a>
+      <a href="#">
+        <i class="fa-regular fa-address-book"></i>
+        <span>您的頻道</span>
+      </a>
+      <a href="#">
+        <i class="fa-regular fa-address-book"></i>
+        <span>您的頻道</span>
+      </a>
+      <a href="#">
+        <i class="fa-regular fa-address-book"></i>
+        <span>您的頻道</span>
+      </a>
+      <a href="#">
+        <i class="fa-regular fa-address-book"></i>
+        <span>您的頻道</span>
+      </a>
+      <a href="#">
+        <i class="fa-regular fa-address-book"></i>
+        <span>您的頻道</span>
+      </a>
+      <a href="#">
+        <i class="fa-regular fa-address-book"></i>
+        <span>您的頻道</span>
+      </a>
+      <a href="#">
+        <i class="fa-regular fa-address-book"></i>
+        <span>您的頻道</span>
+      </a>
+    </div>
+  </div>
+
+  <div id="right">
+    <div id="category">
+      <button class="selected">全部</button>
+      <button>音樂</button>
+      <button>Podcast</button>
+      <button>直播中</button>
+      <button>新聞</button>
+      <button>棒球</button>
+      <button>籃球</button>
+    </div>
+    <div id="main">
+      <div class="content">
+        <img src="https://picsum.photos/400/225/?random=10">
+        <div class="data">
+          <div class="data-left"><img src="https://picsum.photos/36/36/?random=40"></div>
+          <div class="data-center">
+            怎麼靠短影音賺錢？全網最完整的短影音新手教學全攻略！<br>
+            贊助商廣告 ShiFu - 大師課程平台
+          </div>
+          <div class="data-right"><button><i class="fa-solid fa-ellipsis"></i></button></div>
+        </div>
+      </div>
+      <div class="content">
+        <img src="https://picsum.photos/400/225/?random=11">
+        <div class="data">
+          <div class="data-left"><img src="https://picsum.photos/36/36/?random=40"></div>
+          <div class="data-center">
+            怎麼靠短影音賺錢？全網最完整的短影音新手教學全攻略！<br>
+            贊助商廣告 ShiFu - 大師課程平台
+          </div>
+          <div class="data-right"><button><i class="fa-solid fa-ellipsis"></i></button></div>
+        </div>
+      </div>
+      <div class="content">
+        <img src="https://picsum.photos/400/225/?random=12">
+        <div class="data">
+          <div class="data-left"><img src="https://picsum.photos/36/36/?random=40"></div>
+          <div class="data-center">
+            怎麼靠短影音賺錢？全網最完整的短影音新手教學全攻略！<br>
+            贊助商廣告 ShiFu - 大師課程平台
+          </div>
+          <div class="data-right"><button><i class="fa-solid fa-ellipsis"></i></button></div>
+        </div>
+      </div>
+
+      <div class="content">
+        <img src="https://picsum.photos/400/225/?random=10">
+        <div class="data">
+          <div class="data-left"><img src="https://picsum.photos/36/36/?random=40"></div>
+          <div class="data-center">
+            怎麼靠短影音賺錢？全網最完整的短影音新手教學全攻略！<br>
+            贊助商廣告 ShiFu - 大師課程平台
+          </div>
+          <div class="data-right"><button><i class="fa-solid fa-ellipsis"></i></button></div>
+        </div>
+      </div>
+      <div class="content">
+        <img src="https://picsum.photos/400/225/?random=11">
+        <div class="data">
+          <div class="data-left"><img src="https://picsum.photos/36/36/?random=40"></div>
+          <div class="data-center">
+            怎麼靠短影音賺錢？全網最完整的短影音新手教學全攻略！<br>
+            贊助商廣告 ShiFu - 大師課程平台
+          </div>
+          <div class="data-right"><button><i class="fa-solid fa-ellipsis"></i></button></div>
+        </div>
+      </div>
+      <div class="content">
+        <img src="https://picsum.photos/400/225/?random=12">
+        <div class="data">
+          <div class="data-left"><img src="https://picsum.photos/36/36/?random=40"></div>
+          <div class="data-center">
+            怎麼靠短影音賺錢？全網最完整的短影音新手教學全攻略！<br>
+            贊助商廣告 ShiFu - 大師課程平台
+          </div>
+          <div class="data-right"><button><i class="fa-solid fa-ellipsis"></i></button></div>
+        </div>
+      </div>
+
+      <div class="content">
+        <img src="https://picsum.photos/400/225/?random=10">
+        <div class="data">
+          <div class="data-left"><img src="https://picsum.photos/36/36/?random=40"></div>
+          <div class="data-center">
+            怎麼靠短影音賺錢？全網最完整的短影音新手教學全攻略！<br>
+            贊助商廣告 ShiFu - 大師課程平台
+          </div>
+          <div class="data-right"><button><i class="fa-solid fa-ellipsis"></i></button></div>
+        </div>
+      </div>
+      <div class="content">
+        <img src="https://picsum.photos/400/225/?random=11">
+        <div class="data">
+          <div class="data-left"><img src="https://picsum.photos/36/36/?random=40"></div>
+          <div class="data-center">
+            怎麼靠短影音賺錢？全網最完整的短影音新手教學全攻略！<br>
+            贊助商廣告 ShiFu - 大師課程平台
+          </div>
+          <div class="data-right"><button><i class="fa-solid fa-ellipsis"></i></button></div>
+        </div>
+      </div>
+      <div class="content">
+        <img src="https://picsum.photos/400/225/?random=12">
+        <div class="data">
+          <div class="data-left"><img src="https://picsum.photos/36/36/?random=40"></div>
+          <div class="data-center">
+            怎麼靠短影音賺錢？全網最完整的短影音新手教學全攻略！<br>
+            贊助商廣告 ShiFu - 大師課程平台
+          </div>
+          <div class="data-right"><button><i class="fa-solid fa-ellipsis"></i></button></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</body>
+
+</html>
